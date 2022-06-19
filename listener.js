@@ -1806,6 +1806,7 @@ async function startRedis() {
     if (signalLong || signalShort) {
       openDealNew("redis");
     }
+    console.log(signalLong, signalShort);
   });
 }
 
