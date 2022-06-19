@@ -1,17 +1,13 @@
 const redis = require("redis");
-const subscriber = redis.createClient();
 
-const channel = "actions";
+(async () => {
+  const client = redis.createClient();
 
-subscriber.subscribe(channel, (error, channel) => {
-  if (error) {
-    throw new Error(error);
-  }
-  console.log(
-    `Subscribed to ${channel} channel. Listening for updates on the ${channel} channel...`
-  );
-});
+  const subscriber = client.duplicate();
 
-subscriber.on("message", (channel, message) => {
-  console.log(`Received message from ${channel} channel: ${message}`);
-});
+  await subscriber.connect();
+
+  await subscriber.subscribe("actions", (message) => {
+    console.log(message); // 'message'
+  });
+})();
