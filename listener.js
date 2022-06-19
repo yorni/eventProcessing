@@ -42,7 +42,7 @@ let paramsTrade = {
   setSignalFromDepth: false,
   setSignalFromDepthUpdate: true,
   depthOutDateTime: 100,
-  virtualOff: false,
+  virtualOff: process.env["VIRTUALOFF"] == "true",
   feeLimit: 0.00018,
   feeMarket: 0.00036,
   roundDepthTo: 0,
@@ -54,12 +54,12 @@ let paramsTrade = {
   openOnSignalLimit: false,
   percentSignal: process.env["PERCENTSIGNAL"],
   stepSignal: 1,
-  offsetOpenLong: 0,
-  offsetOpenShort: 0,
+  offsetOpenLong: process.env["OFSETLONG"],
+  offsetOpenShort: process.env["OFSETSHORT"],
   stop: 0,
   take: 0,
-  stopStep: 1,
-  takeStep: 3,
+  stopStep: process.env["STOPSTEP"],
+  takeStep: process.env["TAKESTEP"],
   resetPercentDistFromLevel: process.env["RESETDISTANCE"],
   resetStepDistFromOpen: 5,
   closeLevelDownUp: false,
@@ -99,19 +99,14 @@ let signalShort = false;
 
 let paramDepthModule = require("./param_depth_module");
 
-const fs = require("fs");
-const path = require("path");
-
 const Binance = require("node-binance-api");
-const { fsyncSync } = require("fs");
+
 const binance = new Binance().options({
   APIKEY: process.env["APIKEY"],
   APISECRET: process.env["APISECRET"],
   reconnect: true,
   verbose: true,
 });
-console.log(process.env["APIKEY"]);
-console.log(process.env["APISECRET"]);
 
 function processLastBidAsk(data) {
   fullDepthTrade.lastAsk = { p: +data.a, q: +data.A, t: data.E };
