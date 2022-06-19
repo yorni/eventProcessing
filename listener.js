@@ -110,6 +110,8 @@ const binance = new Binance().options({
   reconnect: true,
   verbose: true,
 });
+console.log(process.env["APIKEY"]);
+console.log(process.env["APISECRET"]);
 
 function processLastBidAsk(data) {
   fullDepthTrade.lastAsk = { p: +data.a, q: +data.A, t: data.E };
@@ -1794,11 +1796,7 @@ async function startRedis() {
       paramsTrade.setSignalFromTrade
     ); // 'message'
 
-    if (
-      deal.direction != "" ||
-      paramDepthTrade == undefined ||
-      !paramsTrade.setSignalFromTrade
-    ) {
+    if (deal.direction != "" || paramDepthTrade == undefined) {
       return;
     }
     if (message == "long") {
