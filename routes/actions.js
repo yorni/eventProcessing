@@ -11,7 +11,7 @@ router.get("/:action/", processAction, (req, res) => {
 });
 
 async function processAction(req, res, next) {
-  let action = req.action;
+  await let action = req.action;
   publish(action);
   res.result = {
     code: 200,
@@ -21,7 +21,8 @@ async function processAction(req, res, next) {
 }
 async function publish(action) {
   console.log(`Started ${channel} channel publisher...`);
-  publisher.publish(channel, action);
+  await publisher.connect();
+  await publisher.publish(channel, action);
 }
 
 module.exports = router;
