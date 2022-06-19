@@ -650,6 +650,7 @@ function setSignalFromDepthUpdate() {
 }
 
 function setSignalFromDepth() {
+  return;
   if (
     deal.direction != "" ||
     arrParamDepthTrade.length < 3 ||
