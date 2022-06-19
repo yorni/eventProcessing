@@ -5,7 +5,7 @@ let balanceReal = 0;
 let balancePercent = 0;
 
 //param for real
-let realOn = process.env["REAL"];
+let realOn = process.env["REAL"] == "true";
 let countDealReal = process.env["AMOUNT"];
 let leverage = 0;
 let symbolTrade = process.env["SYMBOL"];
