@@ -12,8 +12,9 @@ router.get("/:action/", processAction, (req, res) => {
 
 async function processAction(req, res, next) {
   let action = req.params.action;
-  console.log(req);
+  console.time("publish");
   await publish("action");
+  console.timeEnd("publish");
   res.result = {
     code: 200,
   };
