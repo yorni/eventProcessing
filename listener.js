@@ -621,6 +621,7 @@ function setSignalFromTrade(trade) {
 }
 
 function setSignalFromDepthUpdate() {
+  return;
   if (
     deal.direction != "" ||
     arrParamDepthTrade.length < 3 ||
@@ -1803,7 +1804,7 @@ async function startRedis() {
       signalShort = true;
     }
     if (signalLong || signalShort) {
-      openDealNew("trade");
+      openDealNew("redis");
     }
   });
 }
