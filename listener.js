@@ -8,8 +8,7 @@ const redis = require("redis");
   await subscriber.connect();
 
   await subscriber.subscribe("actions", (message) => {
-    console.time("publishReceive");
+    console.log(new Date());
     console.log(message); // 'message'
-    console.timeEnd("publishReceive");
   });
 })();
