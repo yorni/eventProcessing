@@ -1319,10 +1319,7 @@ async function setTake() {
         {
           timeInForce: "GTC",
           type: "TAKE_PROFIT",
-          stopPrice: paramDepthModule.roundPlus(
-            deal.take + 2 / accuracySymbol,
-            accuracySymbol2
-          ),
+          stopPrice: paramDepthModule.roundPlus(deal.take, accuracySymbol2),
           priceProtect: true,
           reduceOnly: true,
         }
@@ -1376,10 +1373,7 @@ async function setStop() {
         {
           timeInForce: "GTC",
           type: "STOP",
-          stopPrice: paramDepthModule.roundPlus(
-            deal.stop + 2 / accuracySymbol,
-            accuracySymbol2
-          ),
+          stopPrice: paramDepthModule.roundPlus(deal.stop, accuracySymbol2),
           priceProtect: true,
           reduceOnly: true,
         }
@@ -1544,10 +1538,7 @@ async function changeStop(count, changeAny = false) {
         stopLoss = await binance.futuresSell(symbolTrade, count, deal.stop, {
           timeInForce: "GTC",
           type: "STOP",
-          stopPrice: paramDepthModule.roundPlus(
-            deal.stop + 2 / accuracySymbol,
-            accuracySymbol2
-          ),
+          stopPrice: paramDepthModule.roundPlus(deal.stop, accuracySymbol2),
           priceProtect: true,
           reduceOnly: true,
         });
@@ -1661,10 +1652,7 @@ async function changeTake(count) {
         takeProfit = await binance.futuresBuy(symbolTrade, count, deal.take, {
           timeInForce: "GTC",
           type: "TAKE_PROFIT",
-          stopPrice: paramDepthModule.roundPlus(
-            deal.take + 2 / accuracySymbol,
-            accuracySymbol2
-          ),
+          stopPrice: paramDepthModule.roundPlus(deal.take, accuracySymbol2),
           priceProtect: true,
           reduceOnly: true,
         });
