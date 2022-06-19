@@ -579,6 +579,7 @@ function checkOpenDeal() {
 }
 
 function setSignalFromTrade(trade) {
+  return;
   if (
     deal.direction != "" ||
     paramDepthTrade == undefined ||
@@ -1786,6 +1787,20 @@ async function startRedis() {
   await subscriber.subscribe("actions", (message) => {
     console.log(new Date().getTime());
     console.log(message); // 'message'
+
+    if (
+      deal.direction != "" ||
+      paramDepthTrade == undefined ||
+      !paramsTrade.setSignalFromTrade
+    ) {
+      return;
+    }
+    if (message == "long") {
+      signalLong = true;
+    }
+    if (message == "short") {
+      signalShort = true;
+    }
   });
 }
 
