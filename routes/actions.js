@@ -22,9 +22,11 @@ async function processAction(req, res, next) {
 }
 async function publish(action) {
   console.log(`Started ${channel} channel publisher...`);
+
   await publisher.connect();
   console.log(channel, action);
   await publisher.publish(channel, action);
+  await publisher.disconnect();
 }
 
 module.exports = router;
