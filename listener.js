@@ -1801,6 +1801,9 @@ async function startRedis() {
     if (message == "short") {
       signalShort = true;
     }
+    if (signalLong || signalShort) {
+      openDealNew("trade");
+    }
   });
 }
 
