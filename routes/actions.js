@@ -11,8 +11,8 @@ router.get("/:action/", processAction, (req, res) => {
 });
 
 async function processAction(req, res, next) {
-  await let action = req.action;
-  publish(action);
+  let action = req.action;
+  await publish(action);
   res.result = {
     code: 200,
   };
