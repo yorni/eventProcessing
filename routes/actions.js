@@ -17,14 +17,14 @@ router.post("/:action/", processAction, (req, res) => {
 async function processAction(req, res, next) {
   let action = req.params.action;
   console.log(new Date().getTime());
-  await publish(action);
+  await publish(req, res, action);
   res.result = {
     code: 200,
   };
 
   next();
 }
-async function publish(action) {
+async function publish(req, res, action) {
   message = {
     action: action,
   };
