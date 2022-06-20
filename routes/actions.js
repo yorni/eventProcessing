@@ -11,18 +11,18 @@ router.post("/", processAction, (req, res) => {
 });
 
 async function processAction(req, res, next) {
-  await publish(req, res, action);
+  await publish(req.body);
   res.result = {
     code: 200,
   };
 
   next();
 }
-async function publish(req, res) {
+async function publish(action) {
   console.log(`Started ${channel} channel publisher...`);
 
   await publisher.connect();
-  console.log(channel, req.body);
+  console.log(channel, action);
   await publisher.publish(channel, action);
   await publisher.disconnect();
 }
