@@ -23,7 +23,7 @@ async function publish(action) {
 
   await publisher.connect();
   console.log(channel, action);
-  await publisher.publish(channel, action);
+  await publisher.publish(channel, JSON.stringify(action));
   await publisher.disconnect();
 }
 
