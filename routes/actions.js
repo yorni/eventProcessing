@@ -21,6 +21,12 @@ async function processAction(req, res, next) {
   next();
 }
 async function publish(action) {
+  message = {
+    action: action,
+  };
+  if (action == "settings") {
+    console.log(req.body);
+  }
   console.log(`Started ${channel} channel publisher...`);
 
   await publisher.connect();

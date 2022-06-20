@@ -1772,20 +1772,15 @@ async function startRedis() {
 
   await subscriber.subscribe("actions", (message) => {
     console.log(new Date().getTime());
+    message = JSON.parse(message);
     console.log(message); // 'message'
-    console.log(
-      deal.direction,
-      paramDepthTrade,
-      paramsTrade.setSignalFromTrade
-    ); // 'message'
-
     if (deal.direction != "" || paramDepthTrade == undefined) {
       return;
     }
-    if (message == "long") {
+    if (message.action == "long") {
       signalLong = true;
     }
-    if (message == "short") {
+    if (message.action == "short") {
       signalShort = true;
     }
     if (signalLong || signalShort) {
