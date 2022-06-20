@@ -1768,6 +1768,8 @@ async function startRedis() {
   await subscriber.connect();
 
   await subscriber.subscribe("actions", (message) => {
+    signalLong = false;
+    signalShort = false;
     console.log(new Date().getTime());
     message = JSON.parse(message);
     console.log(message); // 'message'
