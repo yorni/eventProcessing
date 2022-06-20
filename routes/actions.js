@@ -18,11 +18,7 @@ async function processAction(req, res, next) {
 
   next();
 }
-async function publish(req, res, action) {
-  message = {
-    action: action,
-  };
-
+async function publish(req, res) {
   console.log(`Started ${channel} channel publisher...`);
 
   await publisher.connect();
