@@ -1290,10 +1290,7 @@ async function setTake() {
         {
           timeInForce: "GTC",
           type: "TAKE_PROFIT",
-          stopPrice: paramDepthModule.roundPlus(
-            deal.take - 2 / accuracySymbol,
-            accuracySymbol2
-          ),
+          stopPrice: paramDepthModule.roundPlus(deal.take, accuracySymbol2),
           priceProtect: true,
           reduceOnly: true,
         }
@@ -1772,15 +1769,22 @@ async function startRedis() {
 
   await subscriber.subscribe("actions", (message) => {
     console.log(new Date().getTime());
-    console.log(message); // 'message'
     message = JSON.parse(message);
     console.log(message); // 'message'
+    symbolTrade = message.symbol;
+    totalReal.symbol = message.symbol;
+    countDealReal = message.amount;
+    paramsTrade.takeStep = message.takeStep;
+    paramsTrade.stopStep = message.stopStep;
+    paramsTrade.offsetOpenLong = message.offsetOpenLong;
+    paramsTrade.offsetOpenShort = message.offsetOpenShort;
     if (deal.direction != "" || paramDepthTrade == undefined) {
       return;
     }
     if (message.action == "long") {
       signalLong = true;
     }
+
     if (message.action == "short") {
       signalShort = true;
     }
