@@ -10,6 +10,10 @@ router.get("/:action/", processAction, (req, res) => {
   res.json(res.result);
 });
 
+router.post("/:action/", processAction, (req, res) => {
+  res.json(res.result);
+});
+
 async function processAction(req, res, next) {
   let action = req.params.action;
   console.log(new Date().getTime());
